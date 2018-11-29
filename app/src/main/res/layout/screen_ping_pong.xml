@@ -7,22 +7,13 @@
     tools:context=".mvc_controller.MainActivity"
     android:background="@color/colorPrimary">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        style="@style/MyToolBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="Ping/Pong the server"
-        app:titleTextColor="@color/primaryTextColor" />
-
     <ImageView
         android:id="@+id/imageview"
         android:layout_width="240dp"
         android:layout_height="240dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:elevation="8dp"
@@ -30,7 +21,7 @@
         android:src="@drawable/ping_pong_ball"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView"
