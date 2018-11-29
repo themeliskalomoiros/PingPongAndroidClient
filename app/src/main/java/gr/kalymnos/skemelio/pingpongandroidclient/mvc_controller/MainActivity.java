@@ -67,7 +67,8 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onSendClicked() {
-        Toast.makeText(this, "Send button clicked", Toast.LENGTH_SHORT).show();
+        if (client != null)
+            client.pong();
     }
 
     @Override
