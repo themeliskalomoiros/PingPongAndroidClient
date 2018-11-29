@@ -13,7 +13,6 @@ import gr.kalymnos.skemelio.pingpongandroidclient.R;
 public class ConnectionViewMvcImp implements ConnectionViewMvc {
 
     private View root;
-    private Toolbar toolbar;
     private ProgressBar progressBar;
     private FloatingActionButton connect;
     private EditText inputHost, inputPort;
@@ -24,7 +23,6 @@ public class ConnectionViewMvcImp implements ConnectionViewMvc {
 
     private void initializeViews(LayoutInflater inflater, ViewGroup container) {
         root = inflater.inflate(R.layout.screen_connection, container, false);
-        toolbar = root.findViewById(R.id.toolbar);
         progressBar = root.findViewById(R.id.progressBar);
         connect = root.findViewById(R.id.connect_fab);
         inputHost = root.findViewById(R.id.input_host);
@@ -48,11 +46,6 @@ public class ConnectionViewMvcImp implements ConnectionViewMvc {
     @Override
     public void hideProgressBar() {
         progressBar.setVisibility(View.INVISIBLE);
-    }
-
-    @Override
-    public Toolbar getToolbar() {
-        return toolbar;
     }
 
     @Override

@@ -16,7 +16,6 @@ public class PingPongViewMvcImp implements PingPongViewMvc {
     private ImageView ball;
     private TextView text;
     private FloatingActionButton send;
-    private Toolbar toolbar;
 
     public PingPongViewMvcImp(LayoutInflater inflater, ViewGroup parent) {
         initializeViews(inflater, parent);
@@ -26,7 +25,6 @@ public class PingPongViewMvcImp implements PingPongViewMvc {
         root = inflater.inflate(R.layout.screen_ping_pong, parent, false);
         ball = root.findViewById(R.id.imageview);
         text = root.findViewById(R.id.textView);
-        toolbar = root.findViewById(R.id.toolbar);
         send = root.findViewById(R.id.send_fab);
     }
 
@@ -55,10 +53,5 @@ public class PingPongViewMvcImp implements PingPongViewMvc {
     @Override
     public View getRootView() {
         return root;
-    }
-
-    @Override
-    public Toolbar getToolbar() {
-        return toolbar;
     }
 }
