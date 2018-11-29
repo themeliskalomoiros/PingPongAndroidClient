@@ -55,10 +55,9 @@ public class MainActivity extends AppCompatActivity
     public void onConnectClicked(String host, int port) {
         if (!TextUtils.isEmpty(host) && port != INVALID_PORT) {
             if (client == null) {
-                client = new ClientThread(host, port, this);
+                viewMvc.showProgressBar();
+                client = new ClientThread(cachedHost = host, cachedPort = port, this);
                 client.start();
-                cachedHost = host;
-                cachedPort = port;
             }
         } else {
             Snackbar.make(viewMvc.getRootView(), "Fill in all the fields.", Snackbar.LENGTH_SHORT).show();
@@ -83,15 +82,18 @@ public class MainActivity extends AppCompatActivity
                     pingPongFragment.showPong();
                 break;
             case CONNECTION_SUCCESS:
+                viewMvc.hideProgressBar();
                 getSupportFragmentManager().beginTransaction()
                         .replace(viewMvc.getFragmentContainerId(), pingPongFragment = new PingPongFragment())
                         .commit();
                 break;
             case CONNECTION_ERROR:
+                client = null;
                 Snackbar.make(viewMvc.getRootView(), "Could not connect to serve", Snackbar.LENGTH_LONG).show();
                 break;
 
             case END_OF_CONNECTION:
+                client = null;
                 ConnectionFragment connectionFragment = new ConnectionFragment();
                 if (!TextUtils.isEmpty(cachedHost) && cachedPort != INVALID_PORT) {
                     Bundle args = new Bundle();
