@@ -1,7 +1,6 @@
 package gr.kalymnos.skemelio.pingpongandroidclient.mvc_model;
 
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
 
 /*
@@ -10,19 +9,23 @@ import android.os.Message;
 
 public class ClientHandler extends Handler {
 
+    public static final int RECEIVED_PING = 110;
+    public static final int CONNECTION_ERROR = 101;
+    public static final int SEND_PONG = 111;
+
     public ClientHandler(Callback callback) {
         super(callback);
     }
 
     public void sendConnectionErrorMsg() {
         Message msg = obtainMessage();
-        msg.what = ClientThread.CONNECTION_ERROR;
+        msg.what = CONNECTION_ERROR;
         sendMessage(msg);
     }
 
     public void sendReceivedPingMsg(String fromServer) {
         Message msg = obtainMessage();
-        msg.what = ClientThread.RECEIVED_PING;
+        msg.what = RECEIVED_PING;
         msg.obj = fromServer;
         sendMessage(msg);
     }
