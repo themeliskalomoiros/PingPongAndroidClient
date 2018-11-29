@@ -16,6 +16,7 @@ import gr.kalymnos.skemelio.pingpongandroidclient.mvc_view.screen_main.MainScree
 import gr.kalymnos.skemelio.pingpongandroidclient.mvc_view.screen_main.MainScreenViewMvcImp;
 
 import static gr.kalymnos.skemelio.pingpongandroidclient.mvc_model.ClientHandler.CONNECTION_ERROR;
+import static gr.kalymnos.skemelio.pingpongandroidclient.mvc_model.ClientHandler.CONNECTION_SUCCESS;
 import static gr.kalymnos.skemelio.pingpongandroidclient.mvc_model.ClientHandler.RECEIVED_PING;
 import static gr.kalymnos.skemelio.pingpongandroidclient.mvc_model.ClientHandler.SEND_PONG;
 import static gr.kalymnos.skemelio.pingpongandroidclient.mvc_model.ClientThread.INVALID_PORT;
@@ -68,6 +69,11 @@ public class MainActivity extends AppCompatActivity
             case RECEIVED_PING:
                 break;
             case SEND_PONG:
+                break;
+            case CONNECTION_SUCCESS:
+                getSupportFragmentManager().beginTransaction()
+                        .replace(viewMvc.getFragmentContainerId(), new PingPongFragment())
+                        .commit();
                 break;
             case CONNECTION_ERROR:
                 break;
