@@ -13,6 +13,8 @@ import gr.kalymnos.skemelio.pingpongandroidclient.mvc_model.ClientThread;
 import gr.kalymnos.skemelio.pingpongandroidclient.mvc_view.screen_main.MainScreenViewMvc;
 import gr.kalymnos.skemelio.pingpongandroidclient.mvc_view.screen_main.MainScreenViewMvcImp;
 
+import static gr.kalymnos.skemelio.pingpongandroidclient.mvc_controller.ConnectionFragment.EXTRA_HOST;
+import static gr.kalymnos.skemelio.pingpongandroidclient.mvc_controller.ConnectionFragment.EXTRA_PORT;
 import static gr.kalymnos.skemelio.pingpongandroidclient.mvc_model.ClientHandler.CONNECTION_ERROR;
 import static gr.kalymnos.skemelio.pingpongandroidclient.mvc_model.ClientHandler.CONNECTION_SUCCESS;
 import static gr.kalymnos.skemelio.pingpongandroidclient.mvc_model.ClientHandler.END_OF_CONNECTION;
@@ -89,7 +91,15 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case END_OF_CONNECTION:
-
+                ConnectionFragment connectionFragment = new ConnectionFragment();
+                if (!TextUtils.isEmpty(cachedHost) && cachedPort != INVALID_PORT) {
+                    Bundle args = new Bundle();
+                    args.putString(EXTRA_HOST, cachedHost);
+                    args.putInt(EXTRA_PORT, cachedPort);
+                    connectionFragment.setArguments(args);
+                }
+                getSupportFragmentManager().beginTransaction()
+                        .replace(viewMvc.getFragmentContainerId(), connectionFragment);
                 break;
         }
         return true;
