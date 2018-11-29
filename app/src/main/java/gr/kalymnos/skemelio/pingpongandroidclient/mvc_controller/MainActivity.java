@@ -15,6 +15,7 @@ import gr.kalymnos.skemelio.pingpongandroidclient.mvc_view.screen_main.MainScree
 
 import static gr.kalymnos.skemelio.pingpongandroidclient.mvc_model.ClientHandler.CONNECTION_ERROR;
 import static gr.kalymnos.skemelio.pingpongandroidclient.mvc_model.ClientHandler.CONNECTION_SUCCESS;
+import static gr.kalymnos.skemelio.pingpongandroidclient.mvc_model.ClientHandler.END_OF_CONNECTION;
 import static gr.kalymnos.skemelio.pingpongandroidclient.mvc_model.ClientHandler.RECEIVED_PING;
 import static gr.kalymnos.skemelio.pingpongandroidclient.mvc_model.ClientHandler.SENT_PONG;
 import static gr.kalymnos.skemelio.pingpongandroidclient.mvc_model.ClientThread.INVALID_PORT;
@@ -28,6 +29,9 @@ public class MainActivity extends AppCompatActivity
     private MainScreenViewMvc viewMvc;
     private ClientThread client;
     private PingPongFragment pingPongFragment;
+
+    private String cachedHost;
+    private int cachedPort;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,8 @@ public class MainActivity extends AppCompatActivity
             if (client == null) {
                 client = new ClientThread(host, port, this);
                 client.start();
+                cachedHost = host;
+                cachedPort = port;
             }
         } else {
             Snackbar.make(viewMvc.getRootView(), "Fill in all the fields.", Snackbar.LENGTH_SHORT).show();
@@ -80,6 +86,10 @@ public class MainActivity extends AppCompatActivity
                 break;
             case CONNECTION_ERROR:
                 Snackbar.make(viewMvc.getRootView(), "Could not connect to serve", Snackbar.LENGTH_LONG).show();
+                break;
+
+            case END_OF_CONNECTION:
+
                 break;
         }
         return true;

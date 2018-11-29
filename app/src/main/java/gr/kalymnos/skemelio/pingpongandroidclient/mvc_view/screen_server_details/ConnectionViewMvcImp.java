@@ -23,12 +23,14 @@ public class ConnectionViewMvcImp implements ConnectionViewMvc {
         initializeViews(inflater, container);
     }
 
-    private void initializeViews(LayoutInflater inflater, ViewGroup container) {
-        root = inflater.inflate(R.layout.screen_connection, container, false);
-        progressBar = root.findViewById(R.id.progressBar);
-        connect = root.findViewById(R.id.connect_fab);
-        inputHost = root.findViewById(R.id.input_host);
-        inputPort = root.findViewById(R.id.input_port);
+    @Override
+    public void setHostInputText(String host) {
+        inputHost.setText(host);
+    }
+
+    @Override
+    public void setPortInputText(int port) {
+        inputHost.setText(String.valueOf(port));
     }
 
     @Override
@@ -72,5 +74,13 @@ public class ConnectionViewMvcImp implements ConnectionViewMvc {
         } catch (NumberFormatException e) {
             return INVALID_PORT;
         }
+    }
+
+    private void initializeViews(LayoutInflater inflater, ViewGroup container) {
+        root = inflater.inflate(R.layout.screen_connection, container, false);
+        progressBar = root.findViewById(R.id.progressBar);
+        connect = root.findViewById(R.id.connect_fab);
+        inputHost = root.findViewById(R.id.input_host);
+        inputPort = root.findViewById(R.id.input_port);
     }
 }

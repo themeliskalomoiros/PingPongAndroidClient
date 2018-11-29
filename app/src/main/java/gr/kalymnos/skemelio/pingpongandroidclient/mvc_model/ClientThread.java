@@ -19,9 +19,13 @@ public class ClientThread extends Thread {
 
     private static final int TIMEOUT = 500;
     public static final int INVALID_PORT = -1;
+
     private Socket socket;
     private String host;
     private int port;
+
+    private PrintWriter out;
+    private BufferedReader in;
 
     public ClientThread(String host, int port, Handler.Callback callback) {
         this.host = host;
@@ -32,11 +36,11 @@ public class ClientThread extends Thread {
 
     @Override
     public void run() {
-        BufferedReader in = null;
-        String fromServer = null;
         try {
+            String fromServer = null;
             socket.connect(new InetSocketAddress(host, port), TIMEOUT);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            out = new PrintWriter(socket.getOutputStream());
 
             while ((fromServer = in.readLine()).equals(MainActivity.PING)) {
                 handler.sendReceivedPingMsg(fromServer);
@@ -44,15 +48,24 @@ public class ClientThread extends Thread {
         } catch (IOException e) {
             Log.e(TAG, "Error while Client was running.", e);
             handler.sendConnectionErrorMsg();
+        } finally {
+            closeStreams();
+            handler.sendEndOfConnectionMsg();
+        }
+    }
+
+    private void closeStreams() {
+        if (in != null) {
+            try {
+                in.close();
+                out.close();
+            } catch (IOException e) {
+                Log.e(TAG, "Could not close input stream", e);
+            }
         }
     }
 
     public void pong() {
-        try {
-            PrintWriter out = new PrintWriter(socket.getOutputStream());
-            new Thread(() -> out.write(MainActivity.PONG)).start();
-        } catch (IOException e) {
-            Log.e(TAG, "Error obtaining output stream from socket.", e);
-        }
+        new Thread(() -> out.write(MainActivity.PONG)).start();
     }
 }

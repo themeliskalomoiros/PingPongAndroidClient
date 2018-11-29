@@ -14,6 +14,9 @@ import gr.kalymnos.skemelio.pingpongandroidclient.mvc_view.screen_server_details
 
 public class ConnectionFragment extends Fragment implements ConnectionViewMvc.OnConnectClickListener {
 
+    public static final String EXTRA_HOST = "extra host";
+    public static final String EXTRA_PORT= "extra port";
+
     public interface OnConnectClickListener {
         void onConnectClicked(String host, int port);
     }
@@ -26,7 +29,15 @@ public class ConnectionFragment extends Fragment implements ConnectionViewMvc.On
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         viewMvc = new ConnectionViewMvcImp(inflater, container);
         viewMvc.setOnConnectClickListener(this);
+        if (argsContainHostAndPort()){
+            viewMvc.setHostInputText(getArguments().getString(EXTRA_HOST));
+            viewMvc.setPortInputText(getArguments().getInt(EXTRA_PORT));
+        }
         return viewMvc.getRootView();
+    }
+
+    private boolean argsContainHostAndPort() {
+        return getArguments()!=null && getArguments().containsKey(EXTRA_HOST) && getArguments().containsKey(EXTRA_PORT);
     }
 
     @Override

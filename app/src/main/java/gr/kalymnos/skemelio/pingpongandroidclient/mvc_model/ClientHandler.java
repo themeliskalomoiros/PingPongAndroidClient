@@ -11,6 +11,8 @@ public class ClientHandler extends Handler {
 
     public static final int CONNECTION_SUCCESS = 100;
     public static final int CONNECTION_ERROR = 101;
+    public static final int END_OF_CONNECTION = 102;
+
     public static final int RECEIVED_PING = 110;
     public static final int SENT_PONG = 111;
 
@@ -28,6 +30,12 @@ public class ClientHandler extends Handler {
         Message msg = obtainMessage();
         msg.what = RECEIVED_PING;
         msg.obj = fromServer;
+        sendMessage(msg);
+    }
+
+    public void sendEndOfConnectionMsg() {
+        Message msg = obtainMessage();
+        msg.what = END_OF_CONNECTION;
         sendMessage(msg);
     }
 }
