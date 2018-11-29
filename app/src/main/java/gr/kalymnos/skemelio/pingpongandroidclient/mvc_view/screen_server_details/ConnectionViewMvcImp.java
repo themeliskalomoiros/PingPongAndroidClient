@@ -1,7 +1,6 @@
 package gr.kalymnos.skemelio.pingpongandroidclient.mvc_view.screen_server_details;
 
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,11 +29,11 @@ public class ConnectionViewMvcImp implements ConnectionViewMvc {
     }
 
     @Override
-    public void setOnConnectToServerClickListener(OnConnectToServerClickListener listener) {
+    public void setOnConnectToServerClickListener(OnConnectClickListener listener) {
         if (listener != null) {
             String host = inputHost.getText().toString();
             int port = Integer.parseInt(inputPort.getText().toString());
-            connect.setOnClickListener(view -> listener.onConnectToServerClicked(host, port));
+            connect.setOnClickListener(view -> listener.onConnectClicked(host, port));
         }
     }
 
