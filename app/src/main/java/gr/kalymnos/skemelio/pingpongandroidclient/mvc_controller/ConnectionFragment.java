@@ -25,7 +25,7 @@ public class ConnectionFragment extends Fragment implements ConnectionViewMvc.On
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         viewMvc = new ConnectionViewMvcImp(inflater, container);
-        viewMvc.setOnConnectToServerClickListener(this);
+        viewMvc.setOnConnectClickListener(this);
         return viewMvc.getRootView();
     }
 

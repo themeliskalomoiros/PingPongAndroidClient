@@ -8,7 +8,7 @@ public interface ConnectionViewMvc extends ViewMvc {
         void onConnectClicked(String host, int port);
     }
 
-    void setOnConnectToServerClickListener(OnConnectClickListener listener);
+    void setOnConnectClickListener(OnConnectClickListener listener);
 
     void showProgressBar();
 

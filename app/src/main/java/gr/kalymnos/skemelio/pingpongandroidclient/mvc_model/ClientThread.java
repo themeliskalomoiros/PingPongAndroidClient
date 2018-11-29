@@ -27,6 +27,7 @@ public class ClientThread extends Thread {
     private ClientHandler handler;
 
     private static final int TIMEOUT = 500;
+    public static final int INVALID_PORT = -1;
     private Socket socket;
     private String host;
     private int port;

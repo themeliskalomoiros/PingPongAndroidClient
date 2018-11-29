@@ -1,6 +1,7 @@
 package gr.kalymnos.skemelio.pingpongandroidclient.mvc_view.screen_server_details;
 
 import android.support.design.widget.FloatingActionButton;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import gr.kalymnos.skemelio.pingpongandroidclient.R;
+
+import static gr.kalymnos.skemelio.pingpongandroidclient.mvc_model.ClientThread.INVALID_PORT;
 
 public class ConnectionViewMvcImp implements ConnectionViewMvc {
 
@@ -29,12 +32,10 @@ public class ConnectionViewMvcImp implements ConnectionViewMvc {
     }
 
     @Override
-    public void setOnConnectToServerClickListener(OnConnectClickListener listener) {
+    public void setOnConnectClickListener(OnConnectClickListener listener) {
         connect.setOnClickListener(view -> {
             if (listener != null) {
-                String host = inputHost.getText().toString();
-                int port = Integer.parseInt(inputPort.getText().toString());
-                listener.onConnectClicked(host, port);
+                listener.onConnectClicked(getHost(), getPort());
             }
         });
     }
@@ -52,5 +53,24 @@ public class ConnectionViewMvcImp implements ConnectionViewMvc {
     @Override
     public View getRootView() {
         return root;
+    }
+
+    private String getHostInput() {
+        if (!TextUtils.isEmpty(inputHost.getText())) {
+            inputHost.getText().toString();
+        }
+        return null;
+    }
+
+    private String getHost() {
+        return inputHost.getText().toString();
+    }
+
+    private int getPort() {
+        try {
+            return Integer.parseInt(inputPort.getText().toString());
+        } catch (NumberFormatException e) {
+            return INVALID_PORT;
+        }
     }
 }
