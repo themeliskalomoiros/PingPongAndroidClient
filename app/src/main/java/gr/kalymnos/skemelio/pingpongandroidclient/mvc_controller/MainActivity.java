@@ -9,16 +9,14 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.widget.Toast;
 
-import gr.kalymnos.skemelio.pingpongandroidclient.R;
 import gr.kalymnos.skemelio.pingpongandroidclient.mvc_model.ClientThread;
-import gr.kalymnos.skemelio.pingpongandroidclient.mvc_view.ToolbaredViewMvc;
 import gr.kalymnos.skemelio.pingpongandroidclient.mvc_view.screen_main.MainScreenViewMvc;
 import gr.kalymnos.skemelio.pingpongandroidclient.mvc_view.screen_main.MainScreenViewMvcImp;
 
 import static gr.kalymnos.skemelio.pingpongandroidclient.mvc_model.ClientHandler.CONNECTION_ERROR;
 import static gr.kalymnos.skemelio.pingpongandroidclient.mvc_model.ClientHandler.CONNECTION_SUCCESS;
 import static gr.kalymnos.skemelio.pingpongandroidclient.mvc_model.ClientHandler.RECEIVED_PING;
-import static gr.kalymnos.skemelio.pingpongandroidclient.mvc_model.ClientHandler.SEND_PONG;
+import static gr.kalymnos.skemelio.pingpongandroidclient.mvc_model.ClientHandler.SENT_PONG;
 import static gr.kalymnos.skemelio.pingpongandroidclient.mvc_model.ClientThread.INVALID_PORT;
 
 public class MainActivity extends AppCompatActivity
@@ -29,6 +27,7 @@ public class MainActivity extends AppCompatActivity
 
     private MainScreenViewMvc viewMvc;
     private ClientThread client;
+    private PingPongFragment pingPongFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,12 +66,16 @@ public class MainActivity extends AppCompatActivity
     public boolean handleMessage(Message message) {
         switch (message.what) {
             case RECEIVED_PING:
+                if (pingPongFragment != null)
+                    pingPongFragment.showPing();
                 break;
-            case SEND_PONG:
+            case SENT_PONG:
+                if (pingPongFragment != null)
+                    pingPongFragment.showPong();
                 break;
             case CONNECTION_SUCCESS:
                 getSupportFragmentManager().beginTransaction()
-                        .replace(viewMvc.getFragmentContainerId(), new PingPongFragment())
+                        .replace(viewMvc.getFragmentContainerId(), pingPongFragment = new PingPongFragment())
                         .commit();
                 break;
             case CONNECTION_ERROR:

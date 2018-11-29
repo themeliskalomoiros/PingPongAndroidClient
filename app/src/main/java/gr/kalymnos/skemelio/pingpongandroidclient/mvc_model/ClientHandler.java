@@ -12,7 +12,7 @@ public class ClientHandler extends Handler {
     public static final int CONNECTION_SUCCESS = 100;
     public static final int CONNECTION_ERROR = 101;
     public static final int RECEIVED_PING = 110;
-    public static final int SEND_PONG = 111;
+    public static final int SENT_PONG = 111;
 
     public ClientHandler(Callback callback) {
         super(callback);

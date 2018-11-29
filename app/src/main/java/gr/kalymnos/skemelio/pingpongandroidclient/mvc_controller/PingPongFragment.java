@@ -14,6 +14,7 @@ import gr.kalymnos.skemelio.pingpongandroidclient.mvc_view.screen_ping_pong.Ping
 
 public class PingPongFragment extends Fragment implements PingPongViewMvc.OnSendClickListener {
 
+
     public interface OnSendClickListener {
         void onSendClicked();
     }
@@ -39,6 +40,13 @@ public class PingPongFragment extends Fragment implements PingPongViewMvc.OnSend
         }
     }
 
+    public void showPing() {
+        viewMvc.showPing();
+    }
+
+    public void showPong() {
+        viewMvc.showPong();
+    }
 
     @Override
     public void onSendClicked() {
