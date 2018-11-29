@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity
                         .commit();
                 break;
             case CONNECTION_ERROR:
+                Snackbar.make(viewMvc.getRootView(), "Could not connect to serve", Snackbar.LENGTH_LONG).show();
                 break;
         }
         return true;
