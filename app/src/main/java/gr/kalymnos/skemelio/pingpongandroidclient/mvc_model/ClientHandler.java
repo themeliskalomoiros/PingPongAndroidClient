@@ -20,9 +20,10 @@ public class ClientHandler extends Handler {
         sendMessage(msg);
     }
 
-    public void sendReceivedPingMsg() {
+    public void sendReceivedPingMsg(String fromServer) {
         Message msg = obtainMessage();
         msg.what = ClientThread.RECEIVED_PING;
+        msg.obj = fromServer;
         sendMessage(msg);
     }
 }
