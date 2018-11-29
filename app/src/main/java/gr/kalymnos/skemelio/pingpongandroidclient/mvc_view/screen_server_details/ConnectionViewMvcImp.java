@@ -30,11 +30,13 @@ public class ConnectionViewMvcImp implements ConnectionViewMvc {
 
     @Override
     public void setOnConnectToServerClickListener(OnConnectClickListener listener) {
-        if (listener != null) {
-            String host = inputHost.getText().toString();
-            int port = Integer.parseInt(inputPort.getText().toString());
-            connect.setOnClickListener(view -> listener.onConnectClicked(host, port));
-        }
+        connect.setOnClickListener(view -> {
+            if (listener != null) {
+                String host = inputHost.getText().toString();
+                int port = Integer.parseInt(inputPort.getText().toString());
+                listener.onConnectClicked(host, port);
+            }
+        });
     }
 
     @Override

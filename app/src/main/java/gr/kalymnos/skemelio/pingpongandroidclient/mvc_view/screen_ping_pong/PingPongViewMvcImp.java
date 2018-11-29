@@ -29,9 +29,10 @@ public class PingPongViewMvcImp implements PingPongViewMvc {
 
     @Override
     public void setOnSendClickListener(final OnSendClickListener listener) {
-        if (listener != null) {
-            send.setOnClickListener((view) -> listener.onSendClicked());
-        }
+        send.setOnClickListener(view -> {
+            if (listener != null)
+                listener.onSendClicked();
+        });
     }
 
     @Override

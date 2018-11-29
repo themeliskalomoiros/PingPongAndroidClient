@@ -9,7 +9,7 @@ import android.widget.FrameLayout;
 import gr.kalymnos.skemelio.pingpongandroidclient.R;
 import gr.kalymnos.skemelio.pingpongandroidclient.mvc_view.ToolbaredViewMvc;
 
-public class MainScreenViewMvcImp implements ToolbaredViewMvc {
+public class MainScreenViewMvcImp implements MainScreenViewMvc {
 
     private View root;
     private Toolbar toolbar;
@@ -43,5 +43,10 @@ public class MainScreenViewMvcImp implements ToolbaredViewMvc {
         root = inflater.inflate(R.layout.screen_main, container, false);
         toolbar = root.findViewById(R.id.toolbar);
         fragmentContainer = root.findViewById(R.id.fragment_container);
+    }
+
+    @Override
+    public int getFragmentContainerId() {
+        return fragmentContainer.getId();
     }
 }
