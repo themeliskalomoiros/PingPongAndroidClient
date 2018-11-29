@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import gr.kalymnos.skemelio.pingpongandroidclient.R;
 
-public class ConnectActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
