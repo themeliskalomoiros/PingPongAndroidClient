@@ -1,7 +1,6 @@
 package gr.kalymnos.skemelio.pingpongandroidclient.mvc_view.screen_ping_pong;
 
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +30,7 @@ public class PingPongViewMvcImp implements PingPongViewMvc {
     @Override
     public void setOnSendClickListener(final OnSendClickListener listener) {
         if (listener != null) {
-            send.setOnClickListener((view) -> listener.onBallClicked());
+            send.setOnClickListener((view) -> listener.onSendClicked());
         }
     }
 

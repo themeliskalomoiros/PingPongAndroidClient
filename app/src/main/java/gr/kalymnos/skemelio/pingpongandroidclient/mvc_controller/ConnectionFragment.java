@@ -42,6 +42,7 @@ public class ConnectionFragment extends Fragment implements ConnectionViewMvc.On
 
     @Override
     public void onConnectClicked(String host, int port) {
-        callback.onConnectClicked(host, port);
+        if (callback != null)
+            callback.onConnectClicked(host, port);
     }
 }

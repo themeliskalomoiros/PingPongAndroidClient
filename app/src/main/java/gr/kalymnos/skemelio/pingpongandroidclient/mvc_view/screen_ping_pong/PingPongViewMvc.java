@@ -6,7 +6,7 @@ import gr.kalymnos.skemelio.pingpongandroidclient.mvc_view.ViewMvc;
 public interface PingPongViewMvc extends ViewMvc {
 
     interface OnSendClickListener {
-        void onBallClicked();
+        void onSendClicked();
     }
 
     void setOnSendClickListener(OnSendClickListener listener);
