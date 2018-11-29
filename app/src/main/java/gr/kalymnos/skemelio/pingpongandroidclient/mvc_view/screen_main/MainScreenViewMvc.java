@@ -4,4 +4,8 @@ import gr.kalymnos.skemelio.pingpongandroidclient.mvc_view.ToolbaredViewMvc;
 
 public interface MainScreenViewMvc extends ToolbaredViewMvc {
     int getFragmentContainerId();
+
+    void showProgressBar();
+
+    void hideProgressBar();
 }

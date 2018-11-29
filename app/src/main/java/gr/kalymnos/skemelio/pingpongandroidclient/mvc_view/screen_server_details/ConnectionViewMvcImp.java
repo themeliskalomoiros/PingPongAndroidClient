@@ -15,7 +15,6 @@ import static gr.kalymnos.skemelio.pingpongandroidclient.mvc_model.ClientThread.
 public class ConnectionViewMvcImp implements ConnectionViewMvc {
 
     private View root;
-    private ProgressBar progressBar;
     private FloatingActionButton connect;
     private EditText inputHost, inputPort;
 
@@ -40,16 +39,6 @@ public class ConnectionViewMvcImp implements ConnectionViewMvc {
                 listener.onConnectClicked(getHost(), getPort());
             }
         });
-    }
-
-    @Override
-    public void showProgressBar() {
-        progressBar.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideProgressBar() {
-        progressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -78,7 +67,6 @@ public class ConnectionViewMvcImp implements ConnectionViewMvc {
 
     private void initializeViews(LayoutInflater inflater, ViewGroup container) {
         root = inflater.inflate(R.layout.screen_connection, container, false);
-        progressBar = root.findViewById(R.id.progressBar);
         connect = root.findViewById(R.id.connect_fab);
         inputHost = root.findViewById(R.id.input_host);
         inputPort = root.findViewById(R.id.input_port);

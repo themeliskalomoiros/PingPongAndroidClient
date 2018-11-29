@@ -13,8 +13,4 @@ public interface ConnectionViewMvc extends ViewMvc {
     }
 
     void setOnConnectClickListener(OnConnectClickListener listener);
-
-    void showProgressBar();
-
-    void hideProgressBar();
 }
