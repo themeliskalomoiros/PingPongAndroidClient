@@ -1,9 +1,11 @@
-package gr.kalymnos.skemelio.pingpongandroidclient;
+package gr.kalymnos.skemelio.pingpongandroidclient.mvc_controller;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import gr.kalymnos.skemelio.pingpongandroidclient.R;
+
+public class ConnectActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
