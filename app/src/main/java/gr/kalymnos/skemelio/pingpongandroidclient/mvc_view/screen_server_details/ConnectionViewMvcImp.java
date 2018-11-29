@@ -1,0 +1,62 @@
+package gr.kalymnos.skemelio.pingpongandroidclient.mvc_view.screen_server_details;
+
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+
+import gr.kalymnos.skemelio.pingpongandroidclient.R;
+
+public class ConnectionViewMvcImp implements ConnectionViewMvc {
+
+    private View root;
+    private Toolbar toolbar;
+    private ProgressBar progressBar;
+    private FloatingActionButton connect;
+    private EditText inputHost, inputPort;
+
+    public ConnectionViewMvcImp(LayoutInflater inflater, ViewGroup container) {
+        initializeViews(inflater, container);
+    }
+
+    private void initializeViews(LayoutInflater inflater, ViewGroup container) {
+        root = inflater.inflate(R.layout.screen_connection, container, false);
+        toolbar = root.findViewById(R.id.toolbar);
+        progressBar = root.findViewById(R.id.progressBar);
+        connect = root.findViewById(R.id.connect_fab);
+        inputHost = root.findViewById(R.id.input_host);
+        inputPort = root.findViewById(R.id.input_port);
+    }
+
+    @Override
+    public void setOnConnectToServerClickListener(OnConnectToServerClickListener listener) {
+        if (listener != null) {
+            String host = inputHost.getText().toString();
+            int port = Integer.parseInt(inputPort.getText().toString());
+            connect.setOnClickListener(view -> listener.onConnectToServerClicked(host, port));
+        }
+    }
+
+    @Override
+    public void showProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgressBar() {
+        progressBar.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public Toolbar getToolbar() {
+        return toolbar;
+    }
+
+    @Override
+    public View getRootView() {
+        return root;
+    }
+}
