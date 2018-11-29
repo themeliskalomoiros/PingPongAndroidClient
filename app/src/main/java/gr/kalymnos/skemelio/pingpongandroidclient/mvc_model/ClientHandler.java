@@ -38,4 +38,16 @@ public class ClientHandler extends Handler {
         msg.what = END_OF_CONNECTION;
         sendMessage(msg);
     }
+
+    public void sendSentPongMsg() {
+        Message msg = obtainMessage();
+        msg.what = SENT_PONG;
+        sendMessage(msg);
+    }
+
+    public void sendConnectionSuccessMsg() {
+        Message msg = obtainMessage();
+        msg.what = CONNECTION_SUCCESS;
+        sendMessage(msg);
+    }
 }

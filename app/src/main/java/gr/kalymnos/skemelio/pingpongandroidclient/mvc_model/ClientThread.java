@@ -39,6 +39,8 @@ public class ClientThread extends Thread {
         try {
             String fromServer = null;
             socket.connect(new InetSocketAddress(host, port), TIMEOUT);
+            handler.sendConnectionSuccessMsg();
+
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream());
 
