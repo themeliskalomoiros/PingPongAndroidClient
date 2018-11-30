@@ -68,13 +68,24 @@ public class ClientThread extends Thread {
     }
 
     public void shutdown() {
-        if (socket != null) {
+        if (in != null) {
             try {
-                socket.close();
-                handler.sendEndOfConnectionMsg();
+                in.close();
             } catch (IOException e) {
-                Log.d(TAG, "Error while closing socket");
+                Log.e(TAG, "Error whil closing inputstream");
             }
         }
+
+        if (out != null) {
+            out.close();
+        }
+//        if (socket != null) {
+//            try {
+//                socket.close();
+//                handler.sendEndOfConnectionMsg();
+//            } catch (IOException e) {
+//                Log.e(TAG, "Error while closing socket");
+//            }
+//        }
     }
 }
