@@ -68,6 +68,9 @@ public class ClientThread extends Thread {
     }
 
     public void shutdown() {
+        if (out != null) {
+            out.close();
+        }
         if (in != null) {
             try {
                 in.close();
@@ -75,17 +78,5 @@ public class ClientThread extends Thread {
                 Log.e(TAG, "Error whil closing inputstream");
             }
         }
-
-        if (out != null) {
-            out.close();
-        }
-//        if (socket != null) {
-//            try {
-//                socket.close();
-//                handler.sendEndOfConnectionMsg();
-//            } catch (IOException e) {
-//                Log.e(TAG, "Error while closing socket");
-//            }
-//        }
     }
 }
