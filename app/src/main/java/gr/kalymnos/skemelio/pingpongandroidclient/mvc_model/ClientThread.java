@@ -77,7 +77,7 @@ public class ClientThread extends Thread {
     public void pong() {
         new Thread(() -> {
             out.println(MainActivity.PONG);
-            Log.d(TAG, "Wrote a pong");
+            handler.sendSentPongMsg();
         }).start();
     }
 }
