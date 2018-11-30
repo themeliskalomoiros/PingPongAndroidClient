@@ -6,7 +6,9 @@ An android application which connects to the [PingPongBackEnd](https://github.co
 
 Clone the app and open it with Android Studio. Run the app in your phone.
 Fill in the host name and the local port of the machine that runs the [PingPongBackEnd](https://github.com/tomasmichael995/PingPongBackEnd/blob/master/README.md).
+![connection screenshot](https://github.com/tomasmichael995/PingPongAndroidClient/blob/master/Screenshot_20181130-144301.png)
 After a succesfull connection user may send *pongs* and receive *pings* as replies from the server.
+![pingpong screenshot](https://github.com/tomasmichael995/PingPongAndroidClient/blob/master/Screenshot_20181130-145515.png)
 
 ### Prerequisites
 
