@@ -13,7 +13,7 @@ import java.net.Socket;
 import gr.kalymnos.skemelio.pingpongandroidclient.mvc_controller.MainActivity;
 
 public class ClientThread extends Thread {
-    private static final String TAG = "SKEMELIO";
+    private static final String TAG = "PANATHA";
 
     private ClientHandler handler;
 
@@ -39,12 +39,14 @@ public class ClientThread extends Thread {
         try {
             String fromServer = null;
             socket.connect(new InetSocketAddress(host, port), TIMEOUT);
+            Log.d(TAG, "Socket connected");
             handler.sendConnectionSuccessMsg();
 
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream());
 
             while ((fromServer = in.readLine()).equals(MainActivity.PING)) {
+                Log.d(TAG, "Pinged!");
                 handler.sendReceivedPingMsg(fromServer);
             }
         } catch (IOException e) {
@@ -68,6 +70,9 @@ public class ClientThread extends Thread {
     }
 
     public void pong() {
-        new Thread(() -> out.write(MainActivity.PONG)).start();
+        new Thread(() -> {
+            out.write(MainActivity.PONG);
+            Log.d(TAG, "Wrote a pong");
+        }).start();
     }
 }
