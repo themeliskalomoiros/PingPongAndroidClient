@@ -106,7 +106,8 @@ public class MainActivity extends AppCompatActivity
                     connectionFragment.setArguments(args);
                 }
                 getSupportFragmentManager().beginTransaction()
-                        .replace(viewMvc.getFragmentContainerId(), connectionFragment);
+                        .replace(viewMvc.getFragmentContainerId(), connectionFragment)
+                .commit();
                 break;
         }
         return true;
