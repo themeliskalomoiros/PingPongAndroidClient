@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity
 
     private MainScreenViewMvc viewMvc;
     private ClientThread client;
-    private PingPongFragment pingPongFragment;
 
     private String cachedHost;
     private int cachedPort;
@@ -74,17 +73,21 @@ public class MainActivity extends AppCompatActivity
     public boolean handleMessage(Message message) {
         switch (message.what) {
             case RECEIVED_PING:
-                if (pingPongFragment != null)
-                    pingPongFragment.showPing();
+                if (isCurrentFragmentPingPongFragment()) {
+                    PingPongFragment fragment = (PingPongFragment) getSupportFragmentManager().findFragmentById(viewMvc.getFragmentContainerId());
+                    fragment.showPing();
+                }
                 break;
             case SENT_PONG:
-                if (pingPongFragment != null)
-                    pingPongFragment.showPong();
+                if (isCurrentFragmentPingPongFragment()) {
+                    PingPongFragment fragment = (PingPongFragment) getSupportFragmentManager().findFragmentById(viewMvc.getFragmentContainerId());
+                    fragment.showPong();
+                }
                 break;
             case CONNECTION_SUCCESS:
                 viewMvc.hideProgressBar();
                 getSupportFragmentManager().beginTransaction()
-                        .replace(viewMvc.getFragmentContainerId(), pingPongFragment = new PingPongFragment())
+                        .replace(viewMvc.getFragmentContainerId(), new PingPongFragment())
                         .commit();
                 break;
             case CONNECTION_ERROR:
@@ -107,5 +110,9 @@ public class MainActivity extends AppCompatActivity
                 break;
         }
         return true;
+    }
+
+    private boolean isCurrentFragmentPingPongFragment() {
+        return getSupportFragmentManager().findFragmentById(viewMvc.getFragmentContainerId()) instanceof PingPongFragment;
     }
 }
