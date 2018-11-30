@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             case CONNECTION_ERROR:
                 client = null;
+                viewMvc.hideProgressBar();
                 Snackbar.make(viewMvc.getRootView(), "Could not connect to serve", Snackbar.LENGTH_LONG).show();
                 break;
 
