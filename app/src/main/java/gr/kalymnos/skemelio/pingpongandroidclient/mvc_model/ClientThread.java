@@ -39,7 +39,6 @@ public class ClientThread extends Thread {
     @Override
     public void run() {
         try {
-            String fromServer = null;
             socket.connect(new InetSocketAddress(host, port), TIMEOUT);
             Log.d(TAG, "Socket connected");
             handler.sendConnectionSuccessMsg();
@@ -47,15 +46,13 @@ public class ClientThread extends Thread {
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
 
-            while (true) {
-                String response = in.readLine();
-                if (response == null || !response.equals(PING))
-                    break;
-                Log.d(TAG, "Pinged!");
-                handler.sendReceivedPingMsg(fromServer);
+            String response;
+            while ((response = in.readLine()).equals(PING)) {
+                handler.sendReceivedPingMsg(response);
             }
         } catch (IOException e) {
             Log.e(TAG, "Error while Client was running.", e);
+            handler.sendConnectionErrorMsg();
         } finally {
             shutdown();
         }
@@ -68,13 +65,13 @@ public class ClientThread extends Thread {
         }).start();
     }
 
-    public void shutdown(){
-        if (socket!=null) {
+    public void shutdown() {
+        if (socket != null) {
             try {
                 socket.close();
                 handler.sendEndOfConnectionMsg();
             } catch (IOException e) {
-                Log.d(TAG,"Error while closing socket");
+                Log.d(TAG, "Error while closing socket");
             }
         }
     }
