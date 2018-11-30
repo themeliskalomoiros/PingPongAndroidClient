@@ -80,4 +80,14 @@ public class ClientThread extends Thread {
             handler.sendSentPongMsg();
         }).start();
     }
+
+    public void shutdown(){
+        if (socket!=null) {
+            try {
+                socket.close();
+            } catch (IOException e) {
+                Log.d(TAG,"Error while closing socket");
+            }
+        }
+    }
 }
