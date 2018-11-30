@@ -56,21 +56,8 @@ public class ClientThread extends Thread {
             }
         } catch (IOException e) {
             Log.e(TAG, "Error while Client was running.", e);
-            handler.sendConnectionErrorMsg();
         } finally {
-            closeStreams();
-            handler.sendEndOfConnectionMsg();
-        }
-    }
-
-    private void closeStreams() {
-        if (in != null) {
-            try {
-                in.close();
-                out.close();
-            } catch (IOException e) {
-                Log.e(TAG, "Could not close input stream", e);
-            }
+            shutdown();
         }
     }
 
@@ -85,6 +72,7 @@ public class ClientThread extends Thread {
         if (socket!=null) {
             try {
                 socket.close();
+                handler.sendEndOfConnectionMsg();
             } catch (IOException e) {
                 Log.d(TAG,"Error while closing socket");
             }
