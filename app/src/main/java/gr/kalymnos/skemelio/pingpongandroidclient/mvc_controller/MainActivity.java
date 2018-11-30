@@ -115,4 +115,12 @@ public class MainActivity extends AppCompatActivity
     private boolean isCurrentFragmentPingPongFragment() {
         return getSupportFragmentManager().findFragmentById(viewMvc.getFragmentContainerId()) instanceof PingPongFragment;
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (client != null) {
+            client.shutdown();
+        }
+    }
 }
