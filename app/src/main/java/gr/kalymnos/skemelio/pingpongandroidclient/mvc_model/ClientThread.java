@@ -45,11 +45,11 @@ public class ClientThread extends Thread {
             handler.sendConnectionSuccessMsg();
 
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            out = new PrintWriter(socket.getOutputStream(),true);
+            out = new PrintWriter(socket.getOutputStream(), true);
 
             while (true) {
                 String response = in.readLine();
-                if (!response.equals(PING))
+                if (response == null || !response.equals(PING))
                     break;
                 Log.d(TAG, "Pinged!");
                 handler.sendReceivedPingMsg(fromServer);

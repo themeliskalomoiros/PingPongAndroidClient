@@ -41,11 +41,13 @@ public class PingPongFragment extends Fragment implements PingPongViewMvc.OnSend
     }
 
     public void showPing() {
-        viewMvc.showPing();
+        if (viewMvc != null)
+            viewMvc.showPing();
     }
 
     public void showPong() {
-        viewMvc.showPong();
+        if (viewMvc != null)
+            viewMvc.showPong();
     }
 
     @Override
