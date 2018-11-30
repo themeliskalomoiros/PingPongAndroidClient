@@ -29,7 +29,7 @@ public class ConnectionViewMvcImp implements ConnectionViewMvc {
 
     @Override
     public void setPortInputText(int port) {
-        inputHost.setText(String.valueOf(port));
+        inputPort.setText(String.valueOf(port));
     }
 
     @Override
@@ -44,13 +44,6 @@ public class ConnectionViewMvcImp implements ConnectionViewMvc {
     @Override
     public View getRootView() {
         return root;
-    }
-
-    private String getHostInput() {
-        if (!TextUtils.isEmpty(inputHost.getText())) {
-            inputHost.getText().toString();
-        }
-        return null;
     }
 
     private String getHost() {
