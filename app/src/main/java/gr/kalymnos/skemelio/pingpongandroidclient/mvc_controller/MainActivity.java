@@ -108,10 +108,11 @@ public class MainActivity extends AppCompatActivity
                 }
                 break;
             case CONNECTION_SUCCESS:
-                viewMvc.hideProgressBar();
                 getSupportFragmentManager().beginTransaction()
                         .replace(viewMvc.getFragmentContainerId(), new PingPongFragment())
                         .commit();
+                viewMvc.hideProgressBar();
+                viewMvc.bindToolbarTitle("Ping pong");
                 break;
             case CONNECTION_ERROR:
                 client = null;
