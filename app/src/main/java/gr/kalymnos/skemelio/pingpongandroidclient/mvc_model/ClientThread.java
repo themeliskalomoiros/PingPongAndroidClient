@@ -53,6 +53,8 @@ public class ClientThread extends Thread {
         } catch (IOException e) {
             Log.e(TAG, "Error while Client was running.", e);
             handler.sendConnectionErrorMsg();
+        } catch (NullPointerException e) {
+            Log.d(TAG, "Server disconnected");
         } finally {
             shutdown();
         }
